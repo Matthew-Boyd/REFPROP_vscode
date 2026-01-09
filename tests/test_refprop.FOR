@@ -32,7 +32,7 @@ c..Initialize arrays
       enddo
       
 c..Set the path to fluid files (adjust as needed)
-      call SETPATH('E:\Refprop\REFPROP_V10\FLUIDS\')
+      call SETPATH('C:\Program Files (x86)\REFPROP\FLUIDS\')
       
 c..Initialize test suite
       call TEST_INIT('REFPROP Subroutine Tests')
