@@ -1,0 +1,106 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build REFPROP Debug (gfortran)",
+            "type": "shell",
+            "command": "gfortran",
+            "args": [
+                "-g",
+                "-fbacktrace",
+                "-fcheck=all",
+                "-Wall",
+                "-O0",
+                "-ffixed-form",
+                "-ffixed-line-length-none",
+                "-I", "${workspaceFolder}",
+                "-o", "${workspaceFolder}/build/test_driver.exe",
+                "${workspaceFolder}/test_driver.FOR",
+                "${workspaceFolder}/REFPROP.FOR",
+                "${workspaceFolder}/PROP_SUB.FOR",
+                "${workspaceFolder}/FLSH_SUB.FOR",
+                "${workspaceFolder}/SAT_SUB.FOR",
+                "${workspaceFolder}/SETUP.FOR",
+                "${workspaceFolder}/CORE_FEQ.FOR",
+                "${workspaceFolder}/CORE_ANC.FOR",
+                "${workspaceFolder}/CORE_PR.FOR",
+                "${workspaceFolder}/MIX_HMX.FOR",
+                "${workspaceFolder}/TRNSP.FOR",
+                "${workspaceFolder}/TRNS_VIS.FOR",
+                "${workspaceFolder}/TRNS_TCX.FOR",
+                "${workspaceFolder}/UTILITY.FOR",
+                "${workspaceFolder}/DLLFILES/PASS_FTN.FOR"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$gcc",
+            "detail": "Compile test_driver with debug symbols"
+        },
+        {
+            "label": "Build Enthalpy Test (gfortran)",
+            "type": "shell",
+            "command": "gfortran",
+            "args": [
+                "-g",
+                "-fbacktrace",
+                "-fcheck=all",
+                "-Wall",
+                "-O0",
+                "-ffixed-form",
+                "-ffixed-line-length-none",
+                "-I", "${workspaceFolder}",
+                "-o", "${workspaceFolder}/build/test_enthalpy.exe",
+                "${workspaceFolder}/test_enthalpy.FOR",
+                "${workspaceFolder}/REFPROP.FOR",
+                "${workspaceFolder}/PROP_SUB.FOR",
+                "${workspaceFolder}/FLSH_SUB.FOR",
+                "${workspaceFolder}/SAT_SUB.FOR",
+                "${workspaceFolder}/SETUP.FOR",
+                "${workspaceFolder}/CORE_FEQ.FOR",
+                "${workspaceFolder}/CORE_ANC.FOR",
+                "${workspaceFolder}/CORE_PR.FOR",
+                "${workspaceFolder}/MIX_HMX.FOR",
+                "${workspaceFolder}/TRNSP.FOR",
+                "${workspaceFolder}/TRNS_VIS.FOR",
+                "${workspaceFolder}/TRNS_TCX.FOR",
+                "${workspaceFolder}/UTILITY.FOR",
+                "${workspaceFolder}/DLLFILES/PASS_FTN.FOR"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$gcc",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compile test_enthalpy with debug symbols"
+        },
+        {
+            "label": "Create build directory",
+            "type": "shell",
+            "command": "mkdir",
+            "args": ["-p", "build"],
+            "windows": {
+                "command": "cmd",
+                "args": ["/c", "if not exist build mkdir build"]
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build Debug (with directory)",
+            "dependsOn": ["Create build directory", "Build REFPROP Debug (gfortran)"],
+            "dependsOrder": "sequence",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Build Enthalpy Test (with directory)",
+            "dependsOn": ["Create build directory", "Build Enthalpy Test (gfortran)"],
+            "dependsOrder": "sequence",
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}

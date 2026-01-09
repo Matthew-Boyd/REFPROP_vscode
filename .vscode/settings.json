@@ -1,0 +1,13 @@
+{
+    "fortran.formatting.formatter": "fprettify",
+    "fortran.linter.compiler": "gfortran",
+    "fortran.linter.compilerPath": "gfortran",
+    "files.associations": {
+        "*.FOR": "FortranFixedForm",
+        "*.for": "FortranFixedForm",
+        "*.f90": "FortranFreeForm",
+        "*.F90": "FortranFreeForm",
+        "*.INC": "FortranFixedForm",
+        "*.inc": "FortranFixedForm"
+    }
+}
