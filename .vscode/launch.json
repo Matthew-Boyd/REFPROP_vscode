@@ -2,13 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug Enthalpy Test (gfortran + GDB)",
+            "name": "Debug test_enthalpy (GDB)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/test_enthalpy.exe",
+            "program": "${workspaceFolder}/build/bin/test_enthalpy.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/..",
+            "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
@@ -25,16 +25,16 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Build Enthalpy Test (with directory)"
+            "preLaunchTask": "Build test_enthalpy (with directory)"
         },
         {
-            "name": "Debug REFPROP (gfortran + GDB)",
+            "name": "Debug test_refprop (GDB)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/test_driver.exe",
+            "program": "${workspaceFolder}/build/bin/test_refprop.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/..",
+            "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
@@ -51,18 +51,31 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Build Debug (with directory)"
+            "preLaunchTask": "Build test_refprop (with directory)"
         },
         {
-            "name": "Debug REFPROP (Intel + VS Debugger)",
+            "name": "Debug test_enthalpy (VS Debugger)",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/test_driver.exe",
+            "program": "${workspaceFolder}/build/bin/test_enthalpy.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/..",
+            "cwd": "${workspaceFolder}",
             "environment": [],
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "preLaunchTask": "Build test_enthalpy (with directory)"
+        },
+        {
+            "name": "Debug test_refprop (VS Debugger)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/bin/test_refprop.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "preLaunchTask": "Build test_refprop (with directory)"
         }
     ]
 }

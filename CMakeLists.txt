@@ -56,16 +56,17 @@ add_library(refprop SHARED
     DLLFILES/PASS_FTN.FOR
 )
 
-# Test executable
-add_executable(test_driver test_driver.FOR ${REFPROP_SOURCES})
+# ---------------------------------------------------------
+# CTest Integration
+# ---------------------------------------------------------
+enable_testing()
+
+# Add test subdirectory
+add_subdirectory(tests)
 
 # Set output directories
 set_target_properties(refprop PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-)
-
-set_target_properties(test_driver PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )
 
