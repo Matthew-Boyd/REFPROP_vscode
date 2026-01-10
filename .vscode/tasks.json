@@ -2,35 +2,12 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build current test (gfortran)",
+            "label": "Build current test (CMake)",
             "type": "shell",
-            "command": "gfortran",
+            "command": "cmake",
             "args": [
-                "-g",
-                "-fbacktrace",
-                "-fcheck=all",
-                "-Wall",
-                "-O0",
-                "-ffixed-form",
-                "-ffixed-line-length-none",
-                "-I", "${workspaceFolder}",
-                "-o", "${workspaceFolder}/build/bin/${fileBasenameNoExtension}.exe",
-                "${workspaceFolder}/tests/utils.FOR",
-                "${file}",
-                "${workspaceFolder}/DLLFILES/PASS_FTN.FOR",
-                "${workspaceFolder}/REFPROP.FOR",
-                "${workspaceFolder}/PROP_SUB.FOR",
-                "${workspaceFolder}/FLSH_SUB.FOR",
-                "${workspaceFolder}/SAT_SUB.FOR",
-                "${workspaceFolder}/SETUP.FOR",
-                "${workspaceFolder}/CORE_FEQ.FOR",
-                "${workspaceFolder}/CORE_ANC.FOR",
-                "${workspaceFolder}/CORE_PR.FOR",
-                "${workspaceFolder}/MIX_HMX.FOR",
-                "${workspaceFolder}/TRNSP.FOR",
-                "${workspaceFolder}/TRNS_VIS.FOR",
-                "${workspaceFolder}/TRNS_TCX.FOR",
-                "${workspaceFolder}/UTILITY.FOR"
+                "--build", "build",
+                "--target", "${fileBasenameNoExtension}"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -40,80 +17,36 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "Compile the currently open test file with debug symbols"
+            "detail": "Incremental build of the current test using CMake/Ninja"
         },
         {
-            "label": "Build test by name (gfortran)",
+            "label": "Build test by name (CMake)",
             "type": "shell",
-            "command": "gfortran",
+            "command": "cmake",
             "args": [
-                "-g",
-                "-fbacktrace",
-                "-fcheck=all",
-                "-Wall",
-                "-O0",
-                "-ffixed-form",
-                "-ffixed-line-length-none",
-                "-I", "${workspaceFolder}",
-                "-o", "${workspaceFolder}/build/bin/${input:testName}.exe",
-                "${workspaceFolder}/tests/utils.FOR",
-                "${workspaceFolder}/tests/${input:testName}.FOR",
-                "${workspaceFolder}/DLLFILES/PASS_FTN.FOR",
-                "${workspaceFolder}/REFPROP.FOR",
-                "${workspaceFolder}/PROP_SUB.FOR",
-                "${workspaceFolder}/FLSH_SUB.FOR",
-                "${workspaceFolder}/SAT_SUB.FOR",
-                "${workspaceFolder}/SETUP.FOR",
-                "${workspaceFolder}/CORE_FEQ.FOR",
-                "${workspaceFolder}/CORE_ANC.FOR",
-                "${workspaceFolder}/CORE_PR.FOR",
-                "${workspaceFolder}/MIX_HMX.FOR",
-                "${workspaceFolder}/TRNSP.FOR",
-                "${workspaceFolder}/TRNS_VIS.FOR",
-                "${workspaceFolder}/TRNS_TCX.FOR",
-                "${workspaceFolder}/UTILITY.FOR"
+                "--build", "build",
+                "--target", "${input:testName}"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
             "problemMatcher": "$gcc",
             "group": "build",
-            "detail": "Compile a test file by name (will prompt for name)"
-        },
-        {
-            "label": "Create build directories",
-            "type": "shell",
-            "command": "cmd",
-            "args": ["/c", "if not exist build\\bin mkdir build\\bin"],
-            "problemMatcher": []
-        },
-        {
-            "label": "Build current test (with directory)",
-            "dependsOn": ["Create build directories", "Build current test (gfortran)"],
-            "dependsOrder": "sequence",
-            "group": "build",
-            "problemMatcher": []
-        },
-        {
-            "label": "Build test by name (with directory)",
-            "dependsOn": ["Create build directories", "Build test by name (gfortran)"],
-            "dependsOrder": "sequence",
-            "group": "build",
-            "problemMatcher": []
+            "detail": "Incremental build of a test by name using CMake/Ninja"
         },
         {
             "label": "CMake Configure",
             "type": "shell",
             "command": "cmake",
-            "args": ["-S", ".", "-B", "build"],
+            "args": ["-S", ".", "-B", "build", "-G", "Ninja"],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [],
-            "detail": "Configure CMake build"
+            "detail": "Configure CMake build with Ninja generator"
         },
         {
-            "label": "CMake Build",
+            "label": "CMake Build All",
             "type": "shell",
             "command": "cmake",
             "args": ["--build", "build"],
@@ -133,6 +66,17 @@
             },
             "problemMatcher": [],
             "detail": "Run all tests with CTest"
+        },
+        {
+            "label": "Clean Build",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--build", "build", "--target", "clean"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "detail": "Clean all build artifacts"
         }
     ],
     "inputs": [

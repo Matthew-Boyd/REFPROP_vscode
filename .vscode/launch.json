@@ -25,7 +25,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Build current test (with directory)"
+            "preLaunchTask": "Build current test (CMake)"
         },
         {
             "name": "Debug test by name (GDB)",
@@ -51,7 +51,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Build test by name (with directory)"
+            "preLaunchTask": "Build test by name (CMake)"
         },
     ],
     "inputs": [
