@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build test_enthalpy (gfortran)",
+            "label": "Build current test (gfortran)",
             "type": "shell",
             "command": "gfortran",
             "args": [
@@ -14,9 +14,9 @@
                 "-ffixed-form",
                 "-ffixed-line-length-none",
                 "-I", "${workspaceFolder}",
-                "-o", "${workspaceFolder}/build/bin/test_enthalpy.exe",
+                "-o", "${workspaceFolder}/build/bin/${fileBasenameNoExtension}.exe",
                 "${workspaceFolder}/tests/utils.FOR",
-                "${workspaceFolder}/tests/test_enthalpy.FOR",
+                "${file}",
                 "${workspaceFolder}/DLLFILES/PASS_FTN.FOR",
                 "${workspaceFolder}/REFPROP.FOR",
                 "${workspaceFolder}/PROP_SUB.FOR",
@@ -40,7 +40,45 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "Compile test_enthalpy with debug symbols"
+            "detail": "Compile the currently open test file with debug symbols"
+        },
+        {
+            "label": "Build test by name (gfortran)",
+            "type": "shell",
+            "command": "gfortran",
+            "args": [
+                "-g",
+                "-fbacktrace",
+                "-fcheck=all",
+                "-Wall",
+                "-O0",
+                "-ffixed-form",
+                "-ffixed-line-length-none",
+                "-I", "${workspaceFolder}",
+                "-o", "${workspaceFolder}/build/bin/${input:testName}.exe",
+                "${workspaceFolder}/tests/utils.FOR",
+                "${workspaceFolder}/tests/${input:testName}.FOR",
+                "${workspaceFolder}/DLLFILES/PASS_FTN.FOR",
+                "${workspaceFolder}/REFPROP.FOR",
+                "${workspaceFolder}/PROP_SUB.FOR",
+                "${workspaceFolder}/FLSH_SUB.FOR",
+                "${workspaceFolder}/SAT_SUB.FOR",
+                "${workspaceFolder}/SETUP.FOR",
+                "${workspaceFolder}/CORE_FEQ.FOR",
+                "${workspaceFolder}/CORE_ANC.FOR",
+                "${workspaceFolder}/CORE_PR.FOR",
+                "${workspaceFolder}/MIX_HMX.FOR",
+                "${workspaceFolder}/TRNSP.FOR",
+                "${workspaceFolder}/TRNS_VIS.FOR",
+                "${workspaceFolder}/TRNS_TCX.FOR",
+                "${workspaceFolder}/UTILITY.FOR"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$gcc",
+            "group": "build",
+            "detail": "Compile a test file by name (will prompt for name)"
         },
         {
             "label": "Create build directories",
@@ -50,8 +88,15 @@
             "problemMatcher": []
         },
         {
-            "label": "Build test_enthalpy (with directory)",
-            "dependsOn": ["Create build directories", "Build test_enthalpy (gfortran)"],
+            "label": "Build current test (with directory)",
+            "dependsOn": ["Create build directories", "Build current test (gfortran)"],
+            "dependsOrder": "sequence",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Build test by name (with directory)",
+            "dependsOn": ["Create build directories", "Build test by name (gfortran)"],
             "dependsOrder": "sequence",
             "group": "build",
             "problemMatcher": []
@@ -88,6 +133,14 @@
             },
             "problemMatcher": [],
             "detail": "Run all tests with CTest"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "testName",
+            "type": "promptString",
+            "description": "Enter the test name (e.g., test_enthalpy)",
+            "default": "test_enthalpy"
         }
     ]
 }
