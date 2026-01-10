@@ -13,7 +13,8 @@ c..Include constants
       
 c..Variables
       character*255 herr
-      character*255 hFld
+      character*10000 hFld
+      character*255 hpath
       double precision T, D, h
       double precision z(ncmax)
       integer ierr, i, iret
@@ -24,7 +25,8 @@ c..Initialize composition array
       enddo
       
 c..Set the path to fluid files
-      call SETPATH('C:\Program Files (x86)\REFPROP\FLUIDS\')
+      hpath = 'C:/Program Files (x86)/REFPROP'
+      call SETPATHdll(hpath)
       
 c..Initialize test suite
       call TEST_INIT('Enthalpy Calculations')
@@ -39,7 +41,7 @@ c..=========================================================
       call TEST_SECTION('Pure Argon')
       
       hFld = 'ARGON'
-      call SETFLUIDS(hFld, ierr)
+      call SETFLUIDSdll(hFld, ierr)
       call ASSERT_NOERR(ierr, 'SETFLUIDS ARGON - no error')
       
       if (ierr .eq. 0) then
@@ -47,7 +49,7 @@ c..Set composition for pure fluid
         z(1) = 1.0d0
       
 c..Calculate enthalpy
-        call ENTHAL(T, D, z, h)
+        call ENTHALdll(T, D, z, h)
       
 c..Check enthalpy is in reasonable range for Ar at 300K, 10 mol/L
 c..Expected approximately 6000-7000 J/mol
@@ -72,7 +74,7 @@ c..Reset composition array
       enddo
       
       hFld = 'METHANE;ARGON'
-      call SETFLUIDS(hFld, ierr)
+      call SETFLUIDSdll(hFld, ierr)
       call ASSERT_NOERR(ierr, 'SETFLUIDS mixture - no error')
       
       if (ierr .eq. 0) then
@@ -81,7 +83,7 @@ c..Set composition for 50/50 mixture
         z(2) = 0.5d0
       
 c..Calculate enthalpy
-        call ENTHAL(T, D, z, h)
+        call ENTHALdll(T, D, z, h)
       
 c..Check enthalpy is in reasonable range
         call ASSERT_TRUE(h .gt. 0.0d0, 

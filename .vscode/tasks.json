@@ -17,6 +17,7 @@
                 "-o", "${workspaceFolder}/build/bin/test_enthalpy.exe",
                 "${workspaceFolder}/tests/utils.FOR",
                 "${workspaceFolder}/tests/test_enthalpy.FOR",
+                "${workspaceFolder}/DLLFILES/PASS_FTN.FOR",
                 "${workspaceFolder}/REFPROP.FOR",
                 "${workspaceFolder}/PROP_SUB.FOR",
                 "${workspaceFolder}/FLSH_SUB.FOR",
@@ -42,42 +43,6 @@
             "detail": "Compile test_enthalpy with debug symbols"
         },
         {
-            "label": "Build test_refprop (gfortran)",
-            "type": "shell",
-            "command": "gfortran",
-            "args": [
-                "-g",
-                "-fbacktrace",
-                "-fcheck=all",
-                "-Wall",
-                "-O0",
-                "-ffixed-form",
-                "-ffixed-line-length-none",
-                "-I", "${workspaceFolder}",
-                "-o", "${workspaceFolder}/build/bin/test_refprop.exe",
-                "${workspaceFolder}/tests/utils.FOR",
-                "${workspaceFolder}/tests/test_refprop.FOR",
-                "${workspaceFolder}/REFPROP.FOR",
-                "${workspaceFolder}/PROP_SUB.FOR",
-                "${workspaceFolder}/FLSH_SUB.FOR",
-                "${workspaceFolder}/SAT_SUB.FOR",
-                "${workspaceFolder}/SETUP.FOR",
-                "${workspaceFolder}/CORE_FEQ.FOR",
-                "${workspaceFolder}/CORE_ANC.FOR",
-                "${workspaceFolder}/CORE_PR.FOR",
-                "${workspaceFolder}/MIX_HMX.FOR",
-                "${workspaceFolder}/TRNSP.FOR",
-                "${workspaceFolder}/TRNS_VIS.FOR",
-                "${workspaceFolder}/TRNS_TCX.FOR",
-                "${workspaceFolder}/UTILITY.FOR"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": "$gcc",
-            "detail": "Compile test_refprop with debug symbols"
-        },
-        {
             "label": "Create build directories",
             "type": "shell",
             "command": "cmd",
@@ -87,13 +52,6 @@
         {
             "label": "Build test_enthalpy (with directory)",
             "dependsOn": ["Create build directories", "Build test_enthalpy (gfortran)"],
-            "dependsOrder": "sequence",
-            "group": "build",
-            "problemMatcher": []
-        },
-        {
-            "label": "Build test_refprop (with directory)",
-            "dependsOn": ["Create build directories", "Build test_refprop (gfortran)"],
             "dependsOrder": "sequence",
             "group": "build",
             "problemMatcher": []

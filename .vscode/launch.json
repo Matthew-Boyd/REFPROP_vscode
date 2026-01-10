@@ -28,32 +28,6 @@
             "preLaunchTask": "Build test_enthalpy (with directory)"
         },
         {
-            "name": "Debug test_refprop (GDB)",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/build/bin/test_refprop.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerPath": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                },
-                {
-                    "description": "Set disassembly flavor to Intel",
-                    "text": "-gdb-set disassembly-flavor intel",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "Build test_refprop (with directory)"
-        },
-        {
             "name": "Debug test_enthalpy (VS Debugger)",
             "type": "cppvsdbg",
             "request": "launch",
@@ -64,18 +38,6 @@
             "environment": [],
             "console": "integratedTerminal",
             "preLaunchTask": "Build test_enthalpy (with directory)"
-        },
-        {
-            "name": "Debug test_refprop (VS Debugger)",
-            "type": "cppvsdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/build/bin/test_refprop.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "console": "integratedTerminal",
-            "preLaunchTask": "Build test_refprop (with directory)"
         }
     ]
 }

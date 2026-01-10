@@ -47,8 +47,11 @@ set(REFPROP_SOURCES
 # Include directories for .INC files
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-# Build static library
-add_library(refprop_static STATIC ${REFPROP_SOURCES})
+# Build static library (includes DLL wrappers for test compatibility)
+add_library(refprop_static STATIC 
+    ${REFPROP_SOURCES}
+    DLLFILES/PASS_FTN.FOR
+)
 
 # Build shared library (DLL on Windows)
 add_library(refprop SHARED 
