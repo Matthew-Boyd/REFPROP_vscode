@@ -17,8 +17,9 @@ if(CMAKE_Fortran_COMPILER_ID MATCHES "Intel")
     message(STATUS "Using Intel Fortran compiler")
 elseif(CMAKE_Fortran_COMPILER_ID MATCHES "GNU")
     # GNU Fortran (gfortran) debug flags
-    set(CMAKE_Fortran_FLAGS_DEBUG "-g -fbacktrace -fcheck=all -Wall -Wextra -O0 -ffree-line-length-none")
-    set(CMAKE_Fortran_FLAGS_RELEASE "-O2")
+    # set(CMAKE_Fortran_FLAGS_DEBUG "-g -fbacktrace -fcheck=all -Wall -Wextra -O0 -ffree-line-length-none -mfpmath=sse -msse2 -fno-fast-math -fno-unsafe-math-optimizations -fexcess-precision=fast")
+    set(CMAKE_Fortran_FLAGS_DEBUG "-g -fbacktrace -fcheck=all -Wall -Wextra -O0 -ffree-line-length-none -mfpmath=sse -msse2")
+    set(CMAKE_Fortran_FLAGS_RELEASE "-O2 -mfpmath=sse -msse2")
     message(STATUS "Using GNU Fortran compiler")
 endif()
 
