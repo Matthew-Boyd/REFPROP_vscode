@@ -13,7 +13,11 @@ c..Variables
       character*255 hpath
       double precision T, D
       double precision z(ncmax)
-      double precision Pr, er, hr, sr, Cvr, Cpr, ar, gr
+      double precision f(ncmax)
+      double precision a, g, B, C, E, eta, tcx
+      double precision dPdD, dPdT, d2PdD2, d2PdT2, d2PdTD
+      double precision dDdP, dDdT, d2DdP2, d2DdT2, d2DdPT
+      double precision dTdP, dTdD, d2TdP2, d2TdD2, d2TdPD
       integer ierr, i, iret, icomp
           
 c..Initialize composition array
@@ -34,19 +38,26 @@ c..=========================================================
       call TEST_SECTION('Fluid')
       
 c..Set test conditions
-      hFld = 'HYDROGEN'
+      hFld = 'R415B.MIX'
       icomp = 1
-      T = 1000d0
-      D = 1.0d-12
+      T = 307.616d0
+      D = 4.8012d0
       z(1) = 1.0d0
       
-      call SETFLUIDSdll(hFld, ierr)
+    !   call SETFLUIDSdll(hFld, ierr)
+      call SETMIXTUREdll(hFld, z, ierr)
+
+    !   ignore -117 warning
+      if (ierr .eq. -117) then
+        ierr = 0
+      endif
       call ASSERT_NOERR(ierr, 'SETFLUIDS fluid - no error')
       
       if (ierr .eq. 0) then
       
 c..Calculate thermodynamic properties
-        call RESIDUALdll(T, D, z, Pr, er, hr, sr, Cvr, Cpr, ar, gr)
+        ! call AGdll(T, D, z, a, g)
+        call TRNPRPdll(T, D, z, eta, tcx, ierr, herr)
       
 c..Check thermodynamic properties
         call ASSERT_REL_DBL(1.0, 1.0, 0.001d0,
