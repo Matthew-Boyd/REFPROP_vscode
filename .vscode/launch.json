@@ -28,7 +28,7 @@
             "preLaunchTask": "Build current test (GNU)"
         },
         {
-            "name": "Debug current test (VS Debugger / Intel ifx)",
+            "name": "Debug current test (Intel)",
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build_intel/bin/Debug/${fileBasenameNoExtension}.exe",
@@ -71,7 +71,7 @@
             "preLaunchTask": "Build test by name (GNU)"
         },
         {
-            "name": "Debug test by name (VS Debugger / Intel ifx)",
+            "name": "Debug test by name (Intel)",
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build_intel/bin/Debug/${input:testName}.exe",
