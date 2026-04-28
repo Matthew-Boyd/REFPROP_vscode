@@ -12,7 +12,7 @@ set(CMAKE_Fortran_STANDARD 95)
 # Debug flags for stepping through code
 if(CMAKE_Fortran_COMPILER_ID MATCHES "Intel")
     # Intel Fortran debug flags
-    set(CMAKE_Fortran_FLAGS_DEBUG "-g -traceback -check:all -warn:all -debug:full -Od")
+    set(CMAKE_Fortran_FLAGS_DEBUG "-traceback -debug:full -Od")
     set(CMAKE_Fortran_FLAGS_RELEASE "-O2")
     message(STATUS "Using Intel Fortran compiler")
 elseif(CMAKE_Fortran_COMPILER_ID MATCHES "GNU")

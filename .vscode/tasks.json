@@ -7,6 +7,7 @@
             "command": "cmake",
             "args": [
                 "--build", "build",
+                "--config", "Debug",
                 "--target", "${fileBasenameNoExtension}"
             ],
             "options": {
@@ -17,7 +18,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "Incremental build of the current test using CMake/Ninja"
+            "detail": "Incremental build of the current test using CMake/VS2022"
         },
         {
             "label": "Build test by name (CMake)",
@@ -25,6 +26,7 @@
             "command": "cmake",
             "args": [
                 "--build", "build",
+                "--config", "Debug",
                 "--target", "${input:testName}"
             ],
             "options": {
@@ -32,24 +34,30 @@
             },
             "problemMatcher": "$gcc",
             "group": "build",
-            "detail": "Incremental build of a test by name using CMake/Ninja"
+            "detail": "Incremental build of a test by name using CMake/VS2022"
         },
         {
             "label": "CMake Configure",
             "type": "shell",
             "command": "cmake",
-            "args": ["-S", ".", "-B", "build", "-G", "Ninja"],
+            "args": [
+                "-S", ".",
+                "-B", "build",
+                "-G", "Visual Studio 17 2022",
+                "-DCMAKE_Fortran_COMPILER=C:/Program Files (x86)/Intel/oneAPI/compiler/latest/bin/ifx.exe",
+                "-DCMAKE_BUILD_TYPE=Debug"
+            ],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [],
-            "detail": "Configure CMake build with Ninja generator"
+            "detail": "Configure CMake build with VS2022 + Intel ifx (matches library compiler)"
         },
         {
             "label": "CMake Build All",
             "type": "shell",
             "command": "cmake",
-            "args": ["--build", "build"],
+            "args": ["--build", "build", "--config", "Debug"],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
@@ -71,7 +79,7 @@
             "label": "Clean Build",
             "type": "shell",
             "command": "cmake",
-            "args": ["--build", "build", "--target", "clean"],
+            "args": ["--build", "build", "--config", "Debug", "--target", "clean"],
             "options": {
                 "cwd": "${workspaceFolder}"
             },

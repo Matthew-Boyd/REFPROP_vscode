@@ -28,6 +28,23 @@
             "preLaunchTask": "Build current test (CMake)"
         },
         {
+            "name": "Debug current test (VS Debugger / Intel ifx)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/bin/Debug/${fileBasenameNoExtension}.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "C:/Program Files (x86)/Intel/oneAPI/compiler/2026.0/bin;${env:PATH}"
+                }
+            ],
+            "console": "internalConsole",
+            "preLaunchTask": "Build current test (CMake)"
+        },
+        {
             "name": "Debug test by name (GDB)",
             "type": "cppdbg",
             "request": "launch",
@@ -51,6 +68,23 @@
                     "ignoreFailures": true
                 }
             ],
+            "preLaunchTask": "Build test by name (CMake)"
+        },
+        {
+            "name": "Debug test by name (VS Debugger / Intel ifx)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/bin/Debug/${input:testName}.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "C:/Program Files (x86)/Intel/oneAPI/compiler/2026.0/bin;${env:PATH}"
+                }
+            ],
+            "console": "internalConsole",
             "preLaunchTask": "Build test by name (CMake)"
         },
     ],

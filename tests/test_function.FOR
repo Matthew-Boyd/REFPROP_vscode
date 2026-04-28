@@ -3,7 +3,8 @@ c  test_function.FOR - Thermodynamic property calculations
 c  
 c-----------------------------------------------------------------------
       program test_function
-      
+      use refprop_ifc
+
 c..Include constants
       include 'CONSTS.INC'
 
@@ -19,7 +20,7 @@ c..Variables
       double precision dDdP, dDdT, d2DdP2, d2DdT2, d2DdPT
       double precision dTdP, dTdD, d2TdP2, d2TdD2, d2TdPD
       integer ierr, i, iret, icomp
-          
+
 c..Initialize composition array
       do i=1,ncmax
         z(i) = 0.0d0
@@ -60,7 +61,7 @@ c..Calculate thermodynamic properties
         call TRNPRPdll(T, D, z, eta, tcx, ierr, herr)
       
 c..Check thermodynamic properties
-        call ASSERT_REL_DBL(1.0, 1.0, 0.001d0,
+        call ASSERT_REL_DBL(1.0d0, 1.0d0, 0.001d0,
      &                      'Fluid matches reference (0.1%)')
       endif
                 

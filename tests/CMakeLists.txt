@@ -3,7 +3,7 @@
 # Test files are auto-discovered: any file matching test_*.FOR
 
 # Test utility library (shared assertions)
-add_library(test_utils STATIC utils.FOR)
+add_library(test_utils STATIC utils.FOR refprop_ifc.F90)
 target_include_directories(test_utils PUBLIC ${CMAKE_SOURCE_DIR})
 
 # ---------------------------------------------------------
