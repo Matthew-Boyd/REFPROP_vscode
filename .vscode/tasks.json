@@ -2,12 +2,11 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build current test (CMake)",
+            "label": "Build current test (GNU)",
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", "build",
-                "--config", "Debug",
+                "--build", "build_gnu",
                 "--target", "${fileBasenameNoExtension}"
             ],
             "options": {
@@ -18,14 +17,45 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "Incremental build of the current test using CMake/VS2022"
+            "detail": "Incremental build of the current test (gfortran/Ninja)"
         },
         {
-            "label": "Build test by name (CMake)",
+            "label": "Build current test (Intel)",
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", "build",
+                "--build", "build_intel",
+                "--config", "Debug",
+                "--target", "${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$gcc",
+            "group": "build",
+            "detail": "Incremental build of the current test (ifx/VS2022)"
+        },
+        {
+            "label": "Build test by name (GNU)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build", "build_gnu",
+                "--target", "${input:testName}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$gcc",
+            "group": "build",
+            "detail": "Incremental build of a named test (gfortran/Ninja)"
+        },
+        {
+            "label": "Build test by name (Intel)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build", "build_intel",
                 "--config", "Debug",
                 "--target", "${input:testName}"
             ],
@@ -34,57 +64,60 @@
             },
             "problemMatcher": "$gcc",
             "group": "build",
-            "detail": "Incremental build of a test by name using CMake/VS2022"
+            "detail": "Incremental build of a named test (ifx/VS2022)"
         },
         {
-            "label": "CMake Configure",
+            "label": "CMake Configure (GNU)",
             "type": "shell",
             "command": "cmake",
             "args": [
                 "-S", ".",
-                "-B", "build",
-                "-G", "Visual Studio 17 2022",
-                "-DCMAKE_Fortran_COMPILER=C:/Program Files (x86)/Intel/oneAPI/compiler/latest/bin/ifx.exe",
-                "-DCMAKE_BUILD_TYPE=Debug"
+                "-B", "build_gnu",
+                "-G", "Ninja"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [],
-            "detail": "Configure CMake build with VS2022 + Intel ifx (matches library compiler)"
+            "detail": "Configure CMake build with Ninja + gfortran"
         },
         {
-            "label": "CMake Build All",
+            "label": "CMake Configure (Intel)",
             "type": "shell",
             "command": "cmake",
-            "args": ["--build", "build", "--config", "Debug"],
+            "args": [
+                "-S", ".",
+                "-B", "build_intel",
+                "-G", "Visual Studio 17 2022",
+                "-DCMAKE_Fortran_COMPILER=C:/Program Files (x86)/Intel/oneAPI/compiler/2026.0/bin/ifx.exe"
+            ],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "problemMatcher": "$gcc",
-            "detail": "Build all targets with CMake"
+            "problemMatcher": [],
+            "detail": "Configure CMake build with VS2022 + Intel ifx"
         },
         {
-            "label": "CTest Run All",
+            "label": "CTest Run All (GNU)",
             "type": "shell",
             "command": "ctest",
             "args": ["--output-on-failure"],
             "options": {
-                "cwd": "${workspaceFolder}/build"
+                "cwd": "${workspaceFolder}/build_gnu"
             },
             "problemMatcher": [],
-            "detail": "Run all tests with CTest"
+            "detail": "Run all tests with CTest (GNU build)"
         },
         {
-            "label": "Clean Build",
+            "label": "CTest Run All (Intel)",
             "type": "shell",
-            "command": "cmake",
-            "args": ["--build", "build", "--config", "Debug", "--target", "clean"],
+            "command": "ctest",
+            "args": ["--output-on-failure", "--build-config", "Debug"],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${workspaceFolder}/build_intel"
             },
             "problemMatcher": [],
-            "detail": "Clean all build artifacts"
+            "detail": "Run all tests with CTest (Intel build)"
         }
     ],
     "inputs": [

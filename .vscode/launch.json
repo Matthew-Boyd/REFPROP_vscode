@@ -5,7 +5,7 @@
             "name": "Debug current test (GDB)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/bin/${fileBasenameNoExtension}.exe",
+            "program": "${workspaceFolder}/build_gnu/bin/${fileBasenameNoExtension}.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -25,13 +25,13 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Build current test (CMake)"
+            "preLaunchTask": "Build current test (GNU)"
         },
         {
             "name": "Debug current test (VS Debugger / Intel ifx)",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/bin/Debug/${fileBasenameNoExtension}.exe",
+            "program": "${workspaceFolder}/build_intel/bin/Debug/${fileBasenameNoExtension}.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -42,13 +42,13 @@
                 }
             ],
             "console": "internalConsole",
-            "preLaunchTask": "Build current test (CMake)"
+            "preLaunchTask": "Build current test (Intel)"
         },
         {
             "name": "Debug test by name (GDB)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/bin/${input:testName}.exe",
+            "program": "${workspaceFolder}/build_gnu/bin/${input:testName}.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -68,13 +68,13 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Build test by name (CMake)"
+            "preLaunchTask": "Build test by name (GNU)"
         },
         {
             "name": "Debug test by name (VS Debugger / Intel ifx)",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/bin/Debug/${input:testName}.exe",
+            "program": "${workspaceFolder}/build_intel/bin/Debug/${input:testName}.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -85,8 +85,8 @@
                 }
             ],
             "console": "internalConsole",
-            "preLaunchTask": "Build test by name (CMake)"
-        },
+            "preLaunchTask": "Build test by name (Intel)"
+        }
     ],
     "inputs": [
         {
