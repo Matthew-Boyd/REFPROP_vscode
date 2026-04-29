@@ -38,7 +38,7 @@
             "environment": [
                 {
                     "name": "PATH",
-                    "value": "C:/Program Files (x86)/Intel/oneAPI/compiler/2026.0/bin;${env:PATH}"
+                    "value": "C:/Program Files (x86)/Intel/oneAPI/compiler/latest/bin;${env:PATH}"
                 }
             ],
             "console": "internalConsole",
@@ -81,7 +81,7 @@
             "environment": [
                 {
                     "name": "PATH",
-                    "value": "C:/Program Files (x86)/Intel/oneAPI/compiler/2026.0/bin;${env:PATH}"
+                    "value": "C:/Program Files (x86)/Intel/oneAPI/compiler/latest/bin;${env:PATH}"
                 }
             ],
             "console": "internalConsole",

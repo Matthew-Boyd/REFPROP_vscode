@@ -89,7 +89,7 @@
                 "-S", ".",
                 "-B", "build_intel",
                 "-G", "Visual Studio 17 2022",
-                "-DCMAKE_Fortran_COMPILER=C:/Program Files (x86)/Intel/oneAPI/compiler/2026.0/bin/ifx.exe"
+                "-DCMAKE_Fortran_COMPILER=C:/Program Files (x86)/Intel/oneAPI/compiler/latest/bin/ifx.exe"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
