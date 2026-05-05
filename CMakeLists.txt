@@ -11,20 +11,26 @@ set(CMAKE_Fortran_STANDARD 95)
 
 # Debug flags for stepping through code
 if(CMAKE_Fortran_COMPILER_ID MATCHES "Intel")
-    # Base flags always present: symbols + traceback for step-debugging
-    # Progressively uncomment flags below to match the release build and
-    # isolate which flag is responsible for output differences.
-    set(CMAKE_Fortran_FLAGS_DEBUG
-        # Default
-        "-traceback -debug:full -Od"
-        # Add F77 runtime semantics (character args, COMMON blocks)  -> same as default
-        # "-traceback -debug:full -Od -f77rtl"
-        # Add precise FP model (prevents FMA fusion/reordering)  -> same as default
-        # "-traceback -debug:full -Od /fp:precise"
-        # Both together
-        # "-traceback -debug:full -Od -f77rtl /fp:precise"
-        # Can also try -O1
-    )
+    if(UNIX)
+        set(CMAKE_Fortran_FLAGS_DEBUG
+            "-traceback -debug full -O0 -g"
+        )
+    elseif(WIN32)
+        # Base flags always present: symbols + traceback for step-debugging
+        # Progressively uncomment flags below to match the release build and
+        # isolate which flag is responsible for output differences.
+        set(CMAKE_Fortran_FLAGS_DEBUG
+            # Default
+            "-traceback -debug:full -Od"
+            # Add F77 runtime semantics (character args, COMMON blocks)  -> same as default
+            # "-traceback -debug:full -Od -f77rtl"
+            # Add precise FP model (prevents FMA fusion/reordering)  -> same as default
+            # "-traceback -debug:full -Od /fp:precise"
+            # Both together
+            # "-traceback -debug:full -Od -f77rtl /fp:precise"
+            # Can also try -O1
+        )
+    endif()
     set(CMAKE_Fortran_FLAGS_RELEASE "-O2")
     message(STATUS "Using Intel Fortran compiler")
 elseif(CMAKE_Fortran_COMPILER_ID MATCHES "GNU")
