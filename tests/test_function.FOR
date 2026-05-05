@@ -39,14 +39,14 @@ c..=========================================================
       call TEST_SECTION('Fluid')
       
 c..Set test conditions
-      hFld = 'R415B.MIX'
+      hFld = 'R1336MZZZ'
       icomp = 1
-      T = 307.616d0
-      D = 4.8012d0
+      T = 191.782d0
+      D = 8.48276d0
       z(1) = 1.0d0
       
-    !   call SETFLUIDSdll(hFld, ierr)
-      call SETMIXTUREdll(hFld, z, ierr)
+      call SETFLUIDSdll(hFld, ierr)
+    !   call SETMIXTUREdll(hFld, z, ierr)
 
     !   ignore -117 warning
       if (ierr .eq. -117) then
