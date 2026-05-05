@@ -45,6 +45,37 @@
             "preLaunchTask": "Build current test (Intel)"
         },
         {
+            "name": "Debug current test (Intel WSL)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build_intel_wsl/bin/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "internalConsole",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Fortran case-insensitive symbols",
+                    "text": "set case-sensitive off",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "Fortran array lower bound fix",
+                    "text": "set fortran-array-ambiguous on",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build current test (Intel WSL)"
+        },
+        {
             "name": "Debug test by name (GDB)",
             "type": "cppdbg",
             "request": "launch",
@@ -86,6 +117,37 @@
             ],
             "console": "internalConsole",
             "preLaunchTask": "Build test by name (Intel)"
+        },
+        {
+            "name": "Debug test by name (Intel WSL)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build_intel_wsl/bin/${input:testName}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "internalConsole",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Fortran case-insensitive symbols",
+                    "text": "set case-sensitive off",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "Fortran array lower bound fix",
+                    "text": "set fortran-array-ambiguous on",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build test by name (Intel WSL)"
         }
     ],
     "inputs": [

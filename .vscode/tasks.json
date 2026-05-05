@@ -36,6 +36,21 @@
             "detail": "Incremental build of the current test (ifx/VS2022)"
         },
         {
+            "label": "Build current test (Intel WSL)",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "source /opt/intel/oneapi/setvars.sh --force > /dev/null && cmake --build build_intel_wsl --target ${fileBasenameNoExtension} -- -j$(nproc)"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$gcc",
+            "group": "build",
+            "detail": "Incremental build of the current test (ifx/WSL)"
+        },
+        {
             "label": "Build test by name (GNU)",
             "type": "shell",
             "command": "cmake",
@@ -67,6 +82,36 @@
             "detail": "Incremental build of a named test (ifx/VS2022)"
         },
         {
+            "label": "Build test by name (Intel WSL)",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "source /opt/intel/oneapi/setvars.sh --force > /dev/null && cmake --build build_intel_wsl --target ${input:testName} -- -j$(nproc)"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$gcc",
+            "group": "build",
+            "detail": "Incremental build of a named test (ifx/WSL)"
+        },
+        {
+            "label": "CMake Build (Intel WSL)",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "source /opt/intel/oneapi/setvars.sh --force > /dev/null && cmake --build build_intel_wsl -- -j$(nproc)"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": "CMake Configure (Intel WSL)",
+            "problemMatcher": ["$gcc"],
+            "detail": "Build with Intel ifx on WSL"
+        },
+        {
             "label": "CMake Configure (GNU)",
             "type": "shell",
             "command": "cmake",
@@ -96,6 +141,20 @@
             },
             "problemMatcher": [],
             "detail": "Configure CMake build with VS2022 + Intel ifx"
+        },
+        {
+            "label": "CMake Configure (Intel WSL)",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "source /opt/intel/oneapi/setvars.sh --force > /dev/null && cmake -S . -B build_intel_wsl -G 'Unix Makefiles' -DCMAKE_Fortran_COMPILER=ifx -DCMAKE_BUILD_TYPE=Debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "detail": "Configure CMake build with Intel ifx on WSL"
         },
         {
             "label": "CTest Run All (GNU)",

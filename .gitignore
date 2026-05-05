@@ -2,6 +2,7 @@ DLLFILES/
 build/
 build_gnu/
 build_intel/
+build_intel_wsl/
 
 # COMAGA8.INC
 # COMANC.INC
