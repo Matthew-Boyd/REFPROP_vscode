@@ -27,7 +27,8 @@ c..Initialize composition array
       enddo
           
 c..Set the path to fluid files
-      hpath = 'C:/Program Files (x86)/REFPROP'
+    !   hpath = 'C:/Program Files (x86)/REFPROP'
+      hpath = '/mnt/c/Program Files (x86)/REFPROP'
       call SETPATHdll(hpath)
       
 c..Initialize test suite
